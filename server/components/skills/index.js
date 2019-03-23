@@ -9,7 +9,7 @@ const db = require("./skillsModel");
 router.use("/", (req, res) => res.send("Welcome to the Skills API"));
 
 router.get("/", (req, res) => {
-  db.get()
+  db.readSkills()
     .then(skills => {
       res.json(skills);
     })
@@ -18,7 +18,7 @@ router.get("/", (req, res) => {
 
 router.get("/:id", (req, res) => {
   const { id } = req.params;
-  db.get(id)
+  db.readSkill(id)
     .then(skill => {
       if (skill) {
         res.status(200).json(skill);
@@ -35,17 +35,17 @@ router.get("/:id", (req, res) => {
 });
 
 router.post("/", async (req, res) => {
-  if (!req.body.text) {
+  if (!req.body.name) {
     return res
       .status(400)
       .json({ message: "Please provide contents for the skill." });
   }
   try {
-    let data = await db.insert(req.body);
+    let data = await db.createSkill(req.body);
     return res.status(201).json({
-      id: data.id,
-      text: req.body.text,
-      user: req.body.userId
+      skill_id: data.id,
+      prisoner_id: req.body.prisoner_id,
+      name: req.body.name
     });
   } catch (err) {
     res.status(500).json({
@@ -56,13 +56,13 @@ router.post("/", async (req, res) => {
 
 router.delete("/:id", (req, res) => {
   const { id } = req.params;
-  db.get(id).then(skill => {
+  db.readSkill(id).then(skill => {
     if (!skill) {
       res
         .status(404)
         .json({ message: "The skill with the specified ID does not exist." });
     } else {
-      db.remove(id)
+      db.destroySkill(id)
         .then(skill => {
           res.status(200).json({ message: "skill was successfully deleted" });
         })
@@ -92,7 +92,7 @@ router.put("/:id", (req, res) => {
     });
   }
 
-  db.update(id, skill)
+  db.updateSkill(id, skill)
     .then(res.status(200))
     .catch(err => {
       res.status(500).json({ error: "Didn't work, don't know why." });
