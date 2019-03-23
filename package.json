@@ -1,0 +1,39 @@
+{
+  "name": "Backend",
+  "version": "1.0.0",
+  "description": "Project Course Correct allows prison management to broadcast the skills of inmates to make better use of their time using their skills to make a wage and becoming more employable upon re-entry into society.",
+  "main": "index.js",
+  "scripts": {
+    "test": "cross-env DB_ENV=testing jest --watch --verbose",
+    "server": "nodemon",
+    "start": "yarn server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/project-course-correct/Backend.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/project-course-correct/Backend/issues"
+  },
+  "homepage": "https://github.com/project-course-correct/Backend#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "dotenv": "^6.2.0",
+    "express": "^4.16.4",
+    "helmet": "^3.16.0",
+    "jsonwebtoken": "^8.5.0",
+    "knex": "^0.16.3",
+    "pg": "^7.8.2",
+    "sqlite3": "^4.0.6"
+  },
+  "devDependencies": {
+    "cross-env": "^5.2.0",
+    "jest": "^24.4.0",
+    "nodemon": "^1.18.10",
+    "supertest": "^4.0.0"
+  }
+}
