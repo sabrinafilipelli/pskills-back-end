@@ -3,7 +3,7 @@ const express = require("express");
 
 // Router Declaration
 const router = express.Router();
-const db = require("../skills/skillsModel");
+const db = require("./skillsModel");
 
 // Routes
 router.use("/", (req, res) => res.send("Welcome to the Skills API"));
