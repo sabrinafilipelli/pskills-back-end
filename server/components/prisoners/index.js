@@ -113,10 +113,10 @@ router.get("/", async (req, res) => {
 router.get("/:id", async (req, res) => {
   try {
     let { id } = req.params;
-    let profile = await db.readPrisoner(id);
+    let prisoner = await db.readPrisoner(id);
     let skills = await db.readPrisonerSkills(id);
-    let prisoner = { profile: profile, skills: skills };
-    console.log(prisoner, skills);
+
+    console.log(prisoner);
 
     if (!prisoner) {
       res.status(404).json({
