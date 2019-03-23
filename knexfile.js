@@ -7,49 +7,48 @@ const localPg = {
 };
 const dbConnection = process.env.DATABASE_URL || localPg;
 
-
 module.exports = {
   development: {
-    client: 'sqlite3',
+    client: "sqlite3",
     connection: {
-      filename: './db/dev.db3',
+      filename: "./db/dev.db3"
     },
     useNullAsDefault: true,
     migrations: {
-      directory: './db/migrations',
+      directory: "./db/migrations"
     },
     seeds: {
-      directory: './db/seeds',
-    },
+      directory: "./db/seeds"
+    }
   },
-  
+
   testing: {
-    client: 'sqlite3',
+    client: "sqlite3",
     connection: {
-      filename: './db/test.db3',
+      filename: "./db/test.db3"
     },
     useNullAsDefault: true,
     migrations: {
-      directory: './db/migrations',
+      directory: "./db/migrations"
     },
     seeds: {
-      directory: './db/seeds',
-    },
+      directory: "./db/seeds"
+    }
   },
 
   staging: {
-    client: 'postgresql',
+    client: "postgresql",
     connection: {
-      database: 'my_db',
-      user:     'username',
-      password: 'password'
+      database: "my_db",
+      user: "username",
+      password: "password"
     },
     pool: {
       min: 2,
       max: 10
     },
     migrations: {
-      tableName: 'knex_migrations'
+      tableName: "knex_migrations"
     }
   },
 
@@ -82,5 +81,4 @@ module.exports = {
     },
     seeds: { directory: "./db/seeds" }
   }
-
 };
