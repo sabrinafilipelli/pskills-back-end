@@ -6,7 +6,6 @@ const router = express.Router();
 const db = require("./skillsModel");
 
 // Routes
-router.use("/", (req, res) => res.send("Welcome to the Skills API"));
 
 router.get("/", (req, res) => {
   db.readSkills()
