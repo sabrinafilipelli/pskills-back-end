@@ -76,10 +76,10 @@ router.delete("/:id", (req, res) => {
 //updates the user and returns the updated user object
 router.put("/:id", (req, res) => {
   const { id } = req.params;
-  const { text } = req.body;
-  const skill = { text };
+  const { name, prisoner_id } = req.body;
+  const skill = { name, prisoner_id };
 
-  if (!req.body.text) {
+  if (!req.body.name) {
     return res.status(400).json({ message: "Can't be empty." });
   } else {
     db.get(id).then(skill => {
@@ -97,14 +97,11 @@ router.put("/:id", (req, res) => {
       res.status(500).json({ error: "Didn't work, don't know why." });
     });
 
-  db.get(id).then(skill => {
+  db.readSkill(id).then(skill => {
     if (skill) {
       res.status(200).json(skill);
     }
   });
 });
 
-module.exports = router;
-
-// Export
 module.exports = router;
