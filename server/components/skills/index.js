@@ -82,7 +82,7 @@ router.put("/:id", (req, res) => {
   if (!req.body.name) {
     return res.status(400).json({ message: "Can't be empty." });
   } else {
-    db.get(id).then(skill => {
+    db.readSkill(id).then(skill => {
       if (!skill) {
         return res
           .status(404)
