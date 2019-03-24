@@ -114,7 +114,7 @@ router.get("/:id", async (req, res) => {
   try {
     let { id } = req.params;
     let prisoner = await db.readPrisoner(id);
-    let skills = await db.readPrisonerSkills(id);
+    let skills = await skillDb.readSkills(id);
 
     console.log(prisoner);
 
