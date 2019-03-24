@@ -63,7 +63,7 @@ router.delete("/:id", async (req, res) => {
         .json({ message: "The skill with the specified ID does not exist." });
     }
     await db.destroySkill(id);
-    let updatedArray = await db.readSkill();
+    let updatedArray = await db.readSkills();
     return res.status(200).json({
       skills: updatedArray,
       message: "successfully deleted"
