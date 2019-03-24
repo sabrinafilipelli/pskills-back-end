@@ -53,25 +53,45 @@ router.post("/", async (req, res) => {
   }
 });
 
-router.delete("/:id", (req, res) => {
+router.delete("/:id", async (req, res) => {
   const { id } = req.params;
-  db.readSkill(id).then(skill => {
+  try {
+    let skill = await db.readSkill(id);
     if (!skill) {
       res
         .status(404)
         .json({ message: "The skill with the specified ID does not exist." });
-    } else {
-      db.destroySkill(id)
-        .then(skill => {
-          res.status(200).json({ message: "skill was successfully deleted" });
-        })
-        .catch(err => {
-          console.log("Error: ", err);
-          res.status(500).json({ error: "The skill could not be removed" });
-        });
     }
-  });
+    await db.destroySkill(id);
+    let updatedArray = await db.readSkill();
+    return res.status(200).json({
+      skills: updatedArray,
+      message: "successfully deleted"
+    });
+  } catch (err) {
+    res.status(500).json(err.message);
+  }
 });
+
+// router.delete("/:id", (req, res) => {
+//   const { id } = req.params;
+//   db.readSkill(id).then(skill => {
+//     if (!skill) {
+//       res
+//         .status(404)
+//         .json({ message: "The skill with the specified ID does not exist." });
+//     } else {
+//       db.destroySkill(id)
+//         .then(skill => {
+//           res.status(200).json({ message: "skill was successfully deleted" });
+//         })
+//         .catch(err => {
+//           console.log("Error: ", err);
+//           res.status(500).json({ error: "The skill could not be removed" });
+//         });
+//     }
+//   });
+// });
 
 //updates the user and returns the updated user object
 router.put("/:id", (req, res) => {
